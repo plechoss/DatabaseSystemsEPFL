@@ -1,0 +1,235 @@
+<!doctype html>
+<!-- See http://www.firepad.io/docs/ for detailed embedding docs. -->
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Database Project Interface</title>
+  
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
+        <script src="{{url_for('static', filename='main.js')}}"></script>
+
+        <link rel="stylesheet"type="text/css"href="{{ url_for('static',filename='styles/main.css') }}">
+
+    </head>
+    <body>
+        <header>
+            <div class="contentWidth">
+                <h1>Comics</h1>
+                <form>
+                    <p id="searchParagraph">
+                        <input type="search" placeholder="Search" />
+                        <input type="button" id ="searchPlus" value="+" title="Advanced Options" />
+                    </p>
+                    <div id="advancedSearch">
+                        <p>Author: ...</p>
+                        <p>Date: ...</p>
+                    </div>
+                </form>
+                <nav>
+                    <ul>
+                        <li id="homepageItem"><a class="active" href="#">ComicsDb</a></li>
+                        <li id="predefinedQueriesItem"><a href="#">Predefined Queries</a></li>
+                        <li id="searchandinsertItem"><a href="#">Search and insert</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div id="main">
+            <div id="homepageMode">
+                <h2>List</h2>
+                <p>Todo</p>
+            </div>
+            <div id="predefinedQueriesMode">
+                <h2>Predefined Queries</h2>
+                <p>Todo</p>
+            </div>
+            <div id="searchandinsertMode" style="display:none">
+                <h2>Search and insertion of database entries</h2>
+                <form id="newsearch">
+                    <select name="searchtables" id="searchtables">
+                        <option value="actions">Action</option>
+                        <option value="brandgroups">Brand group</option>
+                        <option value="characters">Character</option>
+                        <option value="countries">Country</option>
+                        <option value="indiciapublishers">Indicia publisher</option>
+                        <option value="issues">Issue</option>
+                        <option value="languages">Language</option>
+                        <option value="mappingissueperson">Issue - Person mapping</option>
+                        <option value="mappingissuereprint">Issue - Reprint mapping</option>
+                        <option value="mappingstorycharacter">Story - Character mapping</option>
+                        <option value="mappingstoryfeature">Story - Feature mapping</option>
+                        <option value="mappingstorygenre">Story - Genre mapping</option>
+                        <option value="mappingstoryperson">Story - Person mapping</option>
+                        <option value="mappingstoryreprint">Story - Reprint mapping</option>
+                        <option value="persons">Person</option>
+                        <option value="publishers">Publisher</option>
+                        <option value="series">Series</option>
+                        <option value="seriespublicationtype">Series publication type</option>
+                        <option value="stories">Story</option>
+                        <option value="storyfeature">Story feature</option>
+                        <option value="storygenre">Story genre</option>
+                        <option value="storytype">Story type</option>
+                    </select>
+                    <div id="languages" class="tables" style="display:block">
+                        <input type="text" name="languageid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="languagecode" placeholder="code" class="tftextinput"><br>
+                        <input type="text" name="languagename" placeholder="name" class="tftextinput" maxlength="31"><br>
+                    </div>
+                    <div id="countries" class="tables" style="display:none">
+                        <input type="text" name="countryid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="countrycode" placeholder="code" class="tftextinput"><br>
+                        <input type="text" name="countryname" placeholder="name" class="tftextinput" maxlength="36"><br>
+                    </div>
+                    <div id="seriespublicationtype" class="tables" style="display:none">
+                        <input type="text" name="serpubtypeid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="serpubtypename" placeholder="name" class="tftextinput" maxlength="16"><br>
+                    </div>
+                    <div id="storytype" class="tables" style="display:none">
+                        <input type="text" name="storytypeid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="storytypename" placeholder="name" class="tftextinput" maxlength="40"><br>
+                    </div>
+                    <div id="actions" class="tables" style="display:none">
+                        <input type="text" name="actionid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="actionname" placeholder="name" class="tftextinput"><br>
+                    </div>
+                    
+                    <div id="mappingissueperson" class="tables" style="display:none">
+                        <input type="text" name="mipissueid" placeholder="issue id" class="tftextinput"><br>
+                        <input type="text" name="mipactionid" placeholder="action id" class="tftextinput"><br>
+                        <input type="text" name="mippersonid" placeholder="person id" class="tftextinput"><br>
+                        <input type="text" name="mipdetails" placeholder="details" class="tftextinput"><br>
+                    </div>
+                    <div id="mappingissuereprint" class="tables" style="display:none">
+                        <input type="text" name="mirreprintid" placeholder="reprint id" class="tftextinput"><br>
+                        <input type="text" name="miroriginalissueid" placeholder="original issue id" class="tftextinput"><br>
+                        <input type="text" name="mirtargetissueid" placeholder="target issue id" class="tftextinput"><br>
+                    </div>
+                    <div id="mappingstorycharacter" class="tables" style="display:none">
+                        <input type="text" name="mscstoryid" placeholder="story id" class="tftextinput"><br>
+                        <input type="text" name="mcscharacterid" placeholder="character id" class="tftextinput"><br>
+                    </div>
+                    <div id="mappingstoryfeature" class="tables" style="display:none">
+                        <input type="text" name="msfstoryid" placeholder="story id" class="tftextinput"><br>
+                        <input type="text" name="msffeatureid" placeholder="feature id" class="tftextinput"><br>
+                    </div>
+                    <div id="mappingstorygenre" class="tables" style="display:none">
+                        <input type="text" name="msgstoryid" placeholder="story id" class="tftextinput"><br>
+                        <input type="text" name="msggenreid" placeholder="genre id" class="tftextinput"><br>
+                    </div>
+                    <div id="mappingstoryperson" class="tables" style="display:none">
+                        <input type="text" name="mspstoryid" placeholder="story id" class="tftextinput"><br>
+                        <input type="text" name="mspactionid" placeholder="action id" class="tftextinput"><br>
+                        <input type="text" name="msppersonid" placeholder="person id" class="tftextinput"><br>
+                    </div>
+                    <div id="mappingstoryreprint" class="tables" style="display:none">
+                        <input type="text" name="msreprintid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="msroriginstoryid" placeholder="origin id" class="tftextinput"><br>
+                        <input type="text" name="msrtargetstoryid" placeholder="target id" class="tftextinput"><br>
+                    </div>
+                    <div id="storygenre" class="tables" style="display:none">
+                        <input type="text" name="storygenreid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="storygenrename" placeholder="name" class="tftextinput" maxlength="40"><br>
+                    </div>
+                    <div id="storyfeature" class="tables" style="display:none">
+                        <input type="text" name="storyfeatureid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="storyfeaturename" placeholder="name" class="tftextinput" maxlength="255"><br>
+                    </div>
+                    <div id="characters" class="tables" style="display:none">
+                        <input type="text" name="characterid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="charactername" placeholder="name" class="tftextinput" maxlength="127"><br>
+                    </div>
+                    <div id="publishers" class="tables" style="display:none">
+                        <input type="text" name="publisherid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="publishername" placeholder="name" class="tftextinput" maxlength="127"><br>
+                        <input type="text" name="publishercountryid" placeholder="country id" class="tftextinput"><br>
+                        <input type="text" name="publisherbegan" placeholder="year began" class="tftextinput"><br>
+                        <input type="text" name="publisherended" placeholder="year ended" class="tftextinput"><br>
+                        <input type="text" name="publishernotes" placeholder="notes" class="tftextinput" maxlength="3500"><br>
+                        <input type="text" name="publisherurl" placeholder="url" class="tftextinput" maxlength="255"><br>
+                    </div>
+                    <div id="indiciapublishers" class="tables" style="display:none">
+                        <input type="text" name="indiciaid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="indicianame" placeholder="name" class="tftextinput" maxlength="127"><br>
+                        <input type="text" name="indiciapublisherid" placeholder="publisher id" class="tftextinput"><br>
+                        <input type="text" name="indiciacountryid" placeholder="country id" class="tftextinput"><br>
+                        <input type="text" name="indiciabegan" placeholder="year began" class="tftextinput"><br>
+                        <input type="text" name="indiciaended" placeholder="year ended" class="tftextinput"><br>
+                        <input type="text" name="indiciasurrogate" placeholder="surrogate? True or False" class="tftextinput"><br>
+                        <input type="text" name="indicianotes" placeholder="notes" class="tftextinput" maxlength="3500"><br>
+                        <input type="text" name="indiciaurl" placeholder="url" class="tftextinput" maxlength="255"><br>
+                    </div>
+                    <div id="brandgroups" class="tables" style="display:none">
+                        <input type="text" name="brandid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="brandname" placeholder="name" class="tftextinput" maxlength="127"><br>
+                        <input type="text" name="brandbegan" placeholder="year began" class="tftextinput"><br>
+                        <input type="text" name="brandended" placeholder="year ended" class="tftextinput"><br>
+                        <input type="text" name="brandnotes" placeholder="notes" class="tftextinput" maxlength="3500"><br>
+                        <input type="text" name="brandurl" placeholder="url" class="tftextinput" maxlength="255"><br>
+                        <input type="text" name="pid" placeholder="pid" class="tftextinput"><br>
+                    </div>
+                    <div id="stories" class="tables" style="display:none">
+                        <input type="text" name="storyid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="storytitle" placeholder="title" class="tftextinput" maxlength="127"><br>
+                        <input type="text" name="editing" placeholder="editing" class="tftextinput"><br>
+                        <input type="text" name="synopsys" placeholder="synopsis" class="tftextinput"><br>
+                        <input type="text" name="storynotes" placeholder="notes" class="tftextinput" maxlength="3500"><br>
+                        <input type="text" name="storyreprintnotes" placeholder="story reprint notes" class="tftextinput"><br>
+                        <input type="text" name="genreid" placeholder="genre id" class="tftextinput"><br>
+                        <input type="text" name="issueid" placeholder="issue id" class="tftextinput"><br>
+                        <input type="text" name="storytypeid" placeholder="story type id" class="tftextinput"><br>
+                    </div>
+                    <div id="series" class="tables" style="display:none">
+                        <input type="text" name="seriesid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="seriesname" placeholder="name" class="tftextinput"><br>
+                        <input type="text" name="seriesformat" placeholder="format" class="tftextinput"><br>
+                        <input type="text" name="seriesnotes" placeholder="notes" class="tftextinput"><br>
+                        <input type="text" name="cover_color" placeholder="cover color" class="tftextinput"><br>
+                        <input type="text" name="interior_color" placeholder="interior color" class="tftextinput"><br>
+                        <input type="text" name="seriesbegan" placeholder="year began" class="tftextinput"><br>
+                        <input type="text" name="seriesended" placeholder="year ended" class="tftextinput"><br>
+                        <input type="text" name="dimension_x" placeholder="dimension x" class="tftextinput"><br>
+                        <input type="text" name="dimension_y" placeholder="dimension y" class="tftextinput"><br>
+                        <input type="text" name="paper_stock" placeholder="paper stock" class="tftextinput"><br>
+                        <input type="text" name="binding" placeholder="binding" class="tftextinput"><br>
+                        <input type="text" name="publishing_format" placeholder="publishing format" class="tftextinput"><br>
+                        <input type="text" name="firstid" placeholder="first issue id" class="tftextinput"><br>
+                        <input type="text" name="lastid" placeholder="last issue id" class="tftextinput"><br>
+                        <input type="text" name="seriescountryid" placeholder="country id" class="tftextinput"><br>
+                        <input type="text" name="serieslanguageid" placeholder="language id" class="tftextinput"><br>
+                        <input type="text" name="seriespublisherid" placeholder="publisher id" class="tftextinput"><br>
+                        <input type="text" name="ptid" placeholder="ptid" class="tftextinput"><br>
+                    </div>
+                    <div id="issues" class="tables" style="display:none">
+                        <input type="text" name="issueid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="title" placeholder="title" class="tftextinput"><br>
+                        <input type="text" name="number" placeholder="number" class="tftextinput"><br>
+                        <input type="text" name="publication_year" placeholder="publication_year" class="tftextinput"><br>
+                        <input type="text" name="isbn" placeholder="isbn" class="tftextinput"><br>
+                        <input type="text" name="page_count" placeholder="page_count" class="tftextinput"><br>
+                        <input type="text" name="frequency" placeholder="frequency" class="tftextinput"><br>
+                        <input type="text" name="price" placeholder="price" class="tftextinput"><br>
+                        <input type="text" name="notes" placeholder="notes" class="tftextinput"><br>
+                        <input type="text" name="rating" placeholder="rating" class="tftextinput"><br>
+                        <input type="text" name="on_sale_year" placeholder="on_sale_year" class="tftextinput"><br>
+                        <input type="text" name="sid" placeholder="sid" class="tftextinput"><br>
+                        <input type="text" name="ipid" placeholder="ipid" class="tftextinput"><br>
+                    </div>
+                    <div id="persons" class="tables" style="display:none">
+                        <input type="text" name="personid" placeholder="id" class="tftextinput"><br>
+                        <input type="text" name="personname" placeholder="name" class="tftextinput" maxlength="40"><br>
+                    </div>
+                    <div id="buttons">
+                        <div id="searchbutton" style="display:inline-block"><input type="button" value="search"></div>
+                        <div id="insertbutton" style="display:inline-block"><input type="button" value="insert"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer>
+            <p>Realized by Christophe, Michal, Rehan</p>
+        </footer>
+    </body>
+</html>
